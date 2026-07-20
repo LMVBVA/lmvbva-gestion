@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  COACH
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  EXCUSED
+  LATE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String   @unique
+  password  String
+  role      UserRole
+  active    Boolean  @default(true)
+
+  coachTeams   CoachTeam[]
+  attendances  Attendance[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Team {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+
+  players    Player[]
+  coaches    CoachTeam[]
+  trainings  Training[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CoachTeam {
+  id     Int @id @default(autoincrement())
+  userId Int
+  teamId Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, teamId])
+}
+
+model Player {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  active    Boolean  @default(true)
+
+  teamId Int
+  team   Team @relation(fields: [teamId], references: [id], onDelete: Restrict)
+
+  attendances Attendance[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Training {
+  id     Int      @id @default(autoincrement())
+  date   DateTime
+  teamId Int
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Restrict)
+
+  attendances Attendance[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id       Int              @id @default(autoincrement())
+  status   AttendanceStatus
+
+  trainingId Int
+  playerId   Int
+  recordedByUserId Int
+
+  training Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+  player   Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  recordedBy User   @relation(fields: [recordedByUserId], references: [id])
+
+  recordedAt DateTime @default(now())
+
+  @@unique([trainingId, playerId])
+}
