@@ -4,6 +4,7 @@ require('dotenv').config();
 const teamRoutes = require('./src/routes/team.routes');
 
 const authRoutes = require('./src/routes/auth.routes');
+const playerRoutes = require('./src/routes/player.routes');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/teams', teamRoutes);
+app.use('/players', playerRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ success: true, message: 'API LMVBVA en ligne' });
