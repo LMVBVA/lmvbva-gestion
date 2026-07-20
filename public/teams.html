@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LMVBVA - Équipes</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+    }
+    .topbar img {
+      max-width: 60px;
+      border-radius: 4px;
+    }
+    .topbar button {
+      background: transparent;
+      border: 1px solid #f5c400;
+      color: #f5c400;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .topbar button:hover { background: #f5c400; color: #111; }
+    h1 {
+      text-align: center;
+      color: #f5c400;
+      letter-spacing: 2px;
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+    }
+    .team-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .team-card {
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .team-card:hover { border-color: #f5c400; }
+    .team-name { font-size: 17px; font-weight: bold; }
+    .team-count { color: #bbbbbb; font-size: 14px; }
+    #error { color: #ff6666; text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <img src="logo.jpg" alt="LMVBVA">
+    <button id="logoutBtn">DÉCONNEXION</button>
+  </div>
+  <h1>CHOISIR UNE ÉQUIPE</h1>
+  <div class="team-list" id="teamList"></div>
+  <div id="error"></div>
+
+  <script src="teams.js"></script>
+</body>
+</html>
