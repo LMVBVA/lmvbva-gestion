@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LMVBVA - Appel</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+    }
+    .topbar img { max-width: 60px; border-radius: 4px; }
+    .back-link { color: #f5c400; text-decoration: none; font-size: 14px; }
+    h1 {
+      text-align: center;
+      color: #f5c400;
+      letter-spacing: 2px;
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 6px auto;
+    }
+    #trainingDate {
+      text-align: center;
+      color: #bbbbbb;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      font-size: 14px;
+    }
+    .player-list { max-width: 700px; margin: 0 auto; }
+    .player-row {
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .player-name { font-size: 16px; font-weight: bold; }
+    .status-buttons { display: flex; gap: 6px; }
+    .status-btn {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #555;
+      background: #2a2a2a;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .status-btn.active-PRESENT { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+    .status-btn.active-ABSENT { background: #c62828; border-color: #c62828; color: #fff; }
+    .status-btn.active-EXCUSED { background: #f5c400; border-color: #f5c400; color: #111; }
+    .status-btn.active-LATE { background: #ef6c00; border-color: #ef6c00; color: #fff; }
+    .save-bar { max-width: 700px; margin: 20px auto 0 auto; text-align: center; }
+    #saveBtn {
+      background: #f5c400;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    #message { text-align: center; margin-top: 14px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <img src="logo.jpg" alt="LMVBVA">
+    <a href="#" id="backLink" class="back-link">&larr; RETOUR AUX ENTRAÎNEMENTS</a>
+  </div>
+  <h1>FAIRE L'APPEL</h1>
+  <div id="trainingDate"></div>
+
+  <div class="player-list" id="playerList"></div>
+
+  <div class="save-bar">
+    <button id="saveBtn">ENREGISTRER L'APPEL</button>
+    <div id="message"></div>
+  </div>
+
+  <script src="attendance.js"></script>
+</body>
+</html>
