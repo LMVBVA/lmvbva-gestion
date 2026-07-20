@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+"scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,5 +31,8 @@
   "allowScripts": {
     "@prisma/engines@7.8.0": true,
     "prisma@7.8.0": true
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
