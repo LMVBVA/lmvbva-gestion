@@ -41,5 +41,16 @@ async function getTeamStats(teamId) {
 
   return results;
 }
+async function getTeamAverage(teamId) {
+  const stats = await getTeamStats(teamId);
+  const withData = stats.filter((s) => s.rate !== null);
 
-module.exports = { getPlayerStats, getTeamStats };
+  if (withData.length === 0) {
+    return { average: null, playersCount: stats.length };
+  }
+
+  const average = Math.round(withData.reduce((sum, s) => sum + s.rate, 0) / withData.length);
+  return { average, playersCount: stats.length };
+}
+
+module.exports = { getPlayerStats, getTeamStats, getTeamAverage };

@@ -19,5 +19,13 @@ async function getTeamStats(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
-
-module.exports = { getPlayerStats, getTeamStats };
+async function getTeamAverage(req, res) {
+  try {
+    const result = await statsService.getTeamAverage(req.params.teamId);
+    return res.json({ success: true, data: result });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+module.exports = { getPlayerStats, getTeamStats, getTeamAverage };

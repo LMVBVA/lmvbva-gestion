@@ -43,5 +43,27 @@ async function loadStats() {
     errorDiv.textContent = 'Erreur de connexion au serveur.';
   }
 }
+async function loadTeamAverage() {
+  try {
+    const response = await fetch(`/stats/team/${teamId}/average`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    const result = await response.json();
 
+    if (!result.success) return;
+
+    const teamAverageDiv = document.getElementById('teamAverage');
+    if (result.data.average === null) {
+      teamAverageDiv.innerHTML = `<div class="label">Pas assez de données pour calculer une moyenne d'équipe</div>`;
+    } else {
+      teamAverageDiv.innerHTML = `
+        <div class="big-rate">${result.data.average}%</div>
+        <div class="label">Taux de présence moyen de l'équipe (${result.data.playersCount} joueur(s))</div>
+      `;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+loadTeamAverage();
 loadStats();
