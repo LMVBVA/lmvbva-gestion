@@ -46,5 +46,27 @@ async function assignCoach(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
+async function createTeam(req, res) {
+  const { name } = req.body;
 
-module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach };
+  if (!name) {
+    return res.status(400).json({ success: false, error: 'Le nom de l\'équipe est requis.' });
+  }
+
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Seul un administrateur peut créer une équipe.' });
+  }
+
+  try {
+    const team = await teamService.createTeam(name);
+    return res.status(201).json({ success: true, data: team });
+  } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(400).json({ success: false, error: 'Une équipe porte déjà ce nom.' });
+    }
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam };

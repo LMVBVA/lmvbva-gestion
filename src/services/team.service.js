@@ -40,5 +40,10 @@ async function assignCoach(teamId, userId) {
     },
   });
 }
+async function createTeam(name) {
+  return prisma.team.create({
+    data: { name },
+  });
+}
 
-module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach };
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam };

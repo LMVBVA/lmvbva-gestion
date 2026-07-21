@@ -53,3 +53,33 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 loadTeams();
+document.getElementById('createTeamBtn').addEventListener('click', async () => {
+  const name = document.getElementById('newTeamName').value.trim();
+  if (!name) {
+    errorDiv.textContent = 'Le nom de l\'équipe est requis.';
+    return;
+  }
+
+  try {
+    const response = await fetch('/teams', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name }),
+    });
+    const result = await response.json();
+
+    if (!result.success) {
+      errorDiv.textContent = result.error;
+      return;
+    }
+
+    document.getElementById('newTeamName').value = '';
+    errorDiv.textContent = '';
+    loadTeams();
+  } catch (err) {
+    errorDiv.textContent = 'Erreur de connexion au serveur.';
+  }
+});
