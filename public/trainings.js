@@ -9,7 +9,9 @@ const errorDiv = document.getElementById('error');
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
-  return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const dateText = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const timeText = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  return `${dateText} — ${timeText}`;
 }
 
 async function loadTrainings() {
@@ -40,11 +42,13 @@ async function loadTrainings() {
 }
 
 document.getElementById('createBtn').addEventListener('click', async () => {
-  const date = document.getElementById('newDate').value;
-  if (!date) {
+  const dateValue = document.getElementById('newDate').value;
+  const timeValue = document.getElementById('newTime').value || '00:00';
+  if (!dateValue) {
     errorDiv.textContent = 'Choisis une date.';
     return;
   }
+  const date = `${dateValue}T${timeValue}:00`;
 
   try {
     const response = await fetch('/trainings', {
