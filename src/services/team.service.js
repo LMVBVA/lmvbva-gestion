@@ -18,4 +18,26 @@ async function getTeamById(id) {
   });
 }
 
-module.exports = { getAllTeams, getTeamById };
+async function getAllCoaches() {
+  return prisma.user.findMany({
+    where: { role: 'COACH', active: true },
+  });
+}
+
+async function assignCoach(teamId, userId) {
+  return prisma.coachTeam.upsert({
+    where: {
+      userId_teamId: {
+        userId: Number(userId),
+        teamId: Number(teamId),
+      },
+    },
+    update: {},
+    create: {
+      userId: Number(userId),
+      teamId: Number(teamId),
+    },
+  });
+}
+
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach };
