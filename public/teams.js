@@ -9,7 +9,9 @@ const errorDiv = document.getElementById('error');
 
 async function loadTeams() {
   try {
-    const response = await fetch('/teams');
+    const response = await fetch('/teams', {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
     const result = await response.json();
 
     if (!result.success) {

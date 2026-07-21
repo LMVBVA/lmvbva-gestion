@@ -23,7 +23,9 @@ function formatDate(dateStr) {
 }
 
 async function init() {
-  const trainingRes = await fetch(`/trainings/${trainingId}`);
+  const trainingRes = await fetch(`/trainings/${trainingId}`, {
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
   const trainingResult = await trainingRes.json();
 
   if (!trainingResult.success) {
@@ -39,7 +41,9 @@ async function init() {
     selectedStatus[a.playerId] = a.status;
   });
 
-  const playersRes = await fetch(`/players/team/${training.teamId}`);
+  const playersRes = await fetch(`/players/team/${training.teamId}`, {
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
   const playersResult = await playersRes.json();
 
   playerList.innerHTML = '';
@@ -91,7 +95,10 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   try {
     const response = await fetch('/attendance', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         trainingId: Number(trainingId),
         recordedByUserId: user.id,

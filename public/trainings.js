@@ -14,7 +14,9 @@ function formatDate(dateStr) {
 
 async function loadTrainings() {
   try {
-    const response = await fetch(`/trainings/team/${teamId}`);
+    const response = await fetch(`/trainings/team/${teamId}`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
     const result = await response.json();
 
     if (!result.success) {
@@ -47,7 +49,10 @@ document.getElementById('createBtn').addEventListener('click', async () => {
   try {
     const response = await fetch('/trainings', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({ date, teamId }),
     });
     const result = await response.json();

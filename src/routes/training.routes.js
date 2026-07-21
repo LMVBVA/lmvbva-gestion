@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const trainingController = require('../controllers/training.controller');
+const { requireAuth } = require('../middlewares/auth.middleware');
 
-router.get('/', trainingController.getAllTrainings);
-router.get('/team/:teamId', trainingController.getTrainingsByTeam);
-router.get('/:id', trainingController.getTrainingById);
-router.post('/', trainingController.createTraining);
+router.get('/', requireAuth, trainingController.getAllTrainings);
+router.get('/team/:teamId', requireAuth, trainingController.getTrainingsByTeam);
+router.get('/:id', requireAuth, trainingController.getTrainingById);
+router.post('/', requireAuth, trainingController.createTraining);
 
 module.exports = router;
