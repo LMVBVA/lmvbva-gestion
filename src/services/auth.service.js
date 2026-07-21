@@ -37,5 +37,17 @@ async function login(email, password) {
     },
   };
 }
+async function createUser(data) {
+  const hashedPassword = await bcrypt.hash(data.password, 10);
 
-module.exports = { login };
+  return prisma.user.create({
+    data: {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: hashedPassword,
+      role: data.role,
+    },
+  });
+}
+module.exports = { login, createUser };
