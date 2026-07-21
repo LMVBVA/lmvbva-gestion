@@ -7,6 +7,7 @@ const authRoutes = require('./src/routes/auth.routes');
 const playerRoutes = require('./src/routes/player.routes');
 const trainingRoutes = require('./src/routes/training.routes');
 const attendanceRoutes = require('./src/routes/attendance.routes');
+const statsRoutes = require('./src/routes/stats.routes');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/teams', teamRoutes);
 app.use('/players', playerRoutes);
 app.use('/trainings', trainingRoutes);
 app.use('/attendance', attendanceRoutes);
+app.use('/stats', statsRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ success: true, message: 'API LMVBVA en ligne' });

@@ -3,7 +3,7 @@ if (!token) window.location.href = 'index.html';
 
 const params = new URLSearchParams(window.location.search);
 const teamId = params.get('teamId');
-
+document.getElementById('statsLink').href = `stats.html?teamId=${teamId}`;
 const trainingList = document.getElementById('trainingList');
 const errorDiv = document.getElementById('error');
 
