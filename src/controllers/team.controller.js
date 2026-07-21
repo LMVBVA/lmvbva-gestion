@@ -2,7 +2,7 @@ const teamService = require('../services/team.service');
 
 async function getAllTeams(req, res) {
   try {
-    const teams = await teamService.getAllTeams();
+const teams = await teamService.getAllTeams(req.user);
     return res.json({ success: true, data: teams });
   } catch (err) {
     console.error(err);
