@@ -25,9 +25,18 @@ async function loadTeams() {
       card.className = 'team-card';
       card.innerHTML = `
         <span class="team-name">${team.name}</span>
-        <span class="team-count">${team.players.length} joueur(s)</span>
+        <div class="team-actions">
+          <span class="team-count">${team.players.length} joueur(s)</span>
+          <button class="players-btn">JOUEURS</button>
+          <button class="trainings-btn">ENTRAÎNEMENTS</button>
+        </div>
       `;
-      card.addEventListener('click', () => {
+      card.querySelector('.players-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.location.href = `manage-players.html?teamId=${team.id}`;
+      });
+      card.querySelector('.trainings-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
         window.location.href = `trainings.html?teamId=${team.id}`;
       });
       teamList.appendChild(card);
