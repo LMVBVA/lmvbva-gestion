@@ -46,4 +46,48 @@ async function createUser(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
-module.exports = { login, createUser };
+
+async function getAllCoachAccounts(req, res) {
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Réservé aux administrateurs.' });
+  }
+  try {
+    const coaches = await authService.getAllCoachAccounts();
+    return res.json({ success: true, data: coaches });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+
+async function updateUser(req, res) {
+  const { firstName, lastName } = req.body;
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Réservé aux administrateurs.' });
+  }
+  if (!firstName || !lastName) {
+    return res.status(400).json({ success: false, error: 'Prénom et nom sont requis.' });
+  }
+  try {
+    const user = await authService.updateUser(req.params.id, { firstName, lastName });
+    return res.json({ success: true, data: { id: user.id, firstName: user.firstName, lastName: user.lastName } });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+
+async function toggleUserActive(req, res) {
+  const { active } = req.body;
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Réservé aux administrateurs.' });
+  }
+  try {
+    const user = await authService.toggleUserActive(req.params.id, active);
+    return res.json({ success: true, data: { id: user.id, active: user.active } });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+module.exports = { login, createUser, getAllCoachAccounts, updateUser, toggleUserActive };

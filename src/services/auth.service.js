@@ -50,4 +50,23 @@ async function createUser(data) {
     },
   });
 }
-module.exports = { login, createUser };
+async function getAllCoachAccounts() {
+  return prisma.user.findMany({
+    where: { role: 'COACH' },
+  });
+}
+
+async function updateUser(id, data) {
+  return prisma.user.update({
+    where: { id: Number(id) },
+    data: { firstName: data.firstName, lastName: data.lastName },
+  });
+}
+
+async function toggleUserActive(id, active) {
+  return prisma.user.update({
+    where: { id: Number(id) },
+    data: { active },
+  });
+}
+module.exports = { login, createUser, getAllCoachAccounts, updateUser, toggleUserActive };

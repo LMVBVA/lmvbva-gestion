@@ -69,6 +69,30 @@
     #message { max-width: 700px; margin: 0 auto; text-align: center; }
     #error { color: #ff6666; }
     #success { color: #7ed957; }
+    .coach-list { max-width: 700px; margin: 20px auto 0 auto; }
+.coach-row {
+  background: rgba(28, 28, 28, 0.92);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.coach-actions button {
+  background: transparent;
+  border: 1px solid #f5c400;
+  color: #f5c400;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 6px;
+}
+.coach-actions button:hover { background: #f5c400; color: #111; }
+.coach-actions button.danger { border-color: #c62828; color: #c62828; }
+.coach-actions button.danger:hover { background: #c62828; color: #fff; }
   </style>
 </head>
 <body>
@@ -103,6 +127,7 @@
     <div id="success"></div>
   </div>
 
+  <div class="coach-list" id="coachList"></div>
   <script src="manage-coaches.js"></script>
 </body>
 </html>
