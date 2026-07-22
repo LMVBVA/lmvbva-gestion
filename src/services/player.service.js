@@ -23,5 +23,18 @@ async function createPlayer(data) {
     },
   });
 }
+async function updatePlayer(id, data) {
+  return prisma.player.update({
+    where: { id: Number(id) },
+    data: { firstName: data.firstName, lastName: data.lastName },
+  });
+}
 
-module.exports = { getAllPlayers, getPlayersByTeam, createPlayer };
+async function togglePlayerActive(id, active) {
+  return prisma.player.update({
+    where: { id: Number(id) },
+    data: { active },
+  });
+}
+
+module.exports = { getAllPlayers, getPlayersByTeam, createPlayer, updatePlayer, togglePlayerActive };

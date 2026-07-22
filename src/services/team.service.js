@@ -3,11 +3,14 @@ const prisma = new PrismaClient();
 
 async function getAllTeams(user) {
   if (user.role === 'ADMIN') {
-    return prisma.team.findMany({ include: { players: true } });
+    return prisma.team.findMany({
+      where: { active: true },
+      include: { players: true },
+    });
   }
 
   return prisma.team.findMany({
-    where: { coaches: { some: { userId: user.userId } } },
+    where: { active: true, coaches: { some: { userId: user.userId } } },
     include: { players: true },
   });
 }
@@ -40,10 +43,25 @@ async function assignCoach(teamId, userId) {
     },
   });
 }
+
 async function createTeam(name) {
   return prisma.team.create({
     data: { name },
   });
 }
 
-module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam };
+async function updateTeam(id, name) {
+  return prisma.team.update({
+    where: { id: Number(id) },
+    data: { name },
+  });
+}
+
+async function toggleTeamActive(id, active) {
+  return prisma.team.update({
+    where: { id: Number(id) },
+    data: { active },
+  });
+}
+
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam, updateTeam, toggleTeamActive };

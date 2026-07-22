@@ -34,4 +34,18 @@ async function createTraining(data) {
   });
 }
 
+async function updateTeam(id, name) {
+  return prisma.team.update({
+    where: { id: Number(id) },
+    data: { name },
+  });
+}
+
+async function toggleTeamActive(id, active) {
+  return prisma.team.update({
+    where: { id: Number(id) },
+    data: { active },
+  });
+}
+
 module.exports = { getAllTrainings, getTrainingsByTeam, getTrainingById, createTraining };

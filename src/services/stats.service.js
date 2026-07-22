@@ -9,15 +9,15 @@ async function getPlayerStats(playerId) {
   });
 
   const total = attendances.length;
-  const present = attendances.filter((a) => a.status === 'PRESENT' || a.status === 'LATE').length;
+ const present = attendances.filter((a) => a.status === 'PRESENT').length;
 
   const rate = total === 0 ? null : Math.round((present / total) * 100);
 
-  const breakdown = {
+ const breakdown = {
     PRESENT: attendances.filter((a) => a.status === 'PRESENT').length,
-    ABSENT: attendances.filter((a) => a.status === 'ABSENT').length,
-    EXCUSED: attendances.filter((a) => a.status === 'EXCUSED').length,
-    LATE: attendances.filter((a) => a.status === 'LATE').length,
+    ABSENT_EXCUSED: attendances.filter((a) => a.status === 'ABSENT_EXCUSED').length,
+    ABSENT_UNEXCUSED: attendances.filter((a) => a.status === 'ABSENT_UNEXCUSED').length,
+    INJURED: attendances.filter((a) => a.status === 'INJURED').length,
   };
 
   return { total, rate, breakdown };

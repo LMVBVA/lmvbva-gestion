@@ -10,9 +10,9 @@ const messageDiv = document.getElementById('message');
 
 const statuses = [
   { value: 'PRESENT', label: 'Présent' },
-  { value: 'ABSENT', label: 'Absent' },
-  { value: 'EXCUSED', label: 'Excusé' },
-  { value: 'LATE', label: 'Retard' },
+  { value: 'ABSENT_EXCUSED', label: 'Absence excusée' },
+  { value: 'ABSENT_UNEXCUSED', label: 'Absence non excusée' },
+  { value: 'INJURED', label: 'Blessé' },
 ];
 
 const selectedStatus = {};

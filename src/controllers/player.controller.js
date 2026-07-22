@@ -35,5 +35,29 @@ async function createPlayer(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
+async function updatePlayer(req, res) {
+  const { firstName, lastName } = req.body;
+  if (!firstName || !lastName) {
+    return res.status(400).json({ success: false, error: 'Prénom et nom sont requis.' });
+  }
+  try {
+    const player = await playerService.updatePlayer(req.params.id, { firstName, lastName });
+    return res.json({ success: true, data: player });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
 
-module.exports = { getAllPlayers, getPlayersByTeam, createPlayer };
+async function togglePlayerActive(req, res) {
+  const { active } = req.body;
+  try {
+    const player = await playerService.togglePlayerActive(req.params.id, active);
+    return res.json({ success: true, data: player });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+
+module.exports = { getAllPlayers, getPlayersByTeam, createPlayer, updatePlayer, togglePlayerActive };

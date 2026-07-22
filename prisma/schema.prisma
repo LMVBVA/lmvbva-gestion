@@ -14,9 +14,9 @@ enum UserRole {
 
 enum AttendanceStatus {
   PRESENT
-  ABSENT
-  EXCUSED
-  LATE
+  ABSENT_EXCUSED
+  ABSENT_UNEXCUSED
+  INJURED
 }
 
 model User {
@@ -36,8 +36,9 @@ model User {
 }
 
 model Team {
-  id     Int    @id @default(autoincrement())
-  name   String @unique
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  active Boolean @default(true)
 
   players    Player[]
   coaches    CoachTeam[]

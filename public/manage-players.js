@@ -25,7 +25,64 @@ async function loadPlayers() {
     result.data.forEach((player) => {
       const row = document.createElement('div');
       row.className = 'player-row';
-      row.textContent = `${player.firstName} ${player.lastName}`;
+      row.innerHTML = `
+        <span>${player.firstName} ${player.lastName}</span>
+        <div class="player-actions">
+          <button class="rename-player-btn">RENOMMER</button>
+          <button class="danger deactivate-player-btn">DÉSACTIVER</button>
+        </div>
+      `;
+
+      row.querySelector('.rename-player-btn').addEventListener('click', async () => {
+        const firstName = prompt('Prénom :', player.firstName);
+        if (firstName === null) return;
+        const lastName = prompt('Nom :', player.lastName);
+        if (lastName === null) return;
+
+        try {
+          const res = await fetch(`/players/${player.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ firstName, lastName }),
+          });
+          const result2 = await res.json();
+          if (!result2.success) {
+            errorDiv.textContent = result2.error;
+            return;
+          }
+          loadPlayers();
+        } catch (err) {
+          errorDiv.textContent = 'Erreur de connexion au serveur.';
+        }
+      });
+
+      row.querySelector('.deactivate-player-btn').addEventListener('click', async () => {
+        const confirmed = confirm(`Désactiver ${player.firstName} ${player.lastName} ? Son historique sera conservé.`);
+        if (!confirmed) return;
+
+        try {
+          const res = await fetch(`/players/${player.id}/active`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ active: false }),
+          });
+          const result2 = await res.json();
+          if (!result2.success) {
+            errorDiv.textContent = result2.error;
+            return;
+          }
+          loadPlayers();
+        } catch (err) {
+          errorDiv.textContent = 'Erreur de connexion au serveur.';
+        }
+      });
+
       playerList.appendChild(row);
     });
   } catch (err) {
@@ -49,18 +106,6 @@ async function loadCoaches() {
       option.textContent = `${coach.firstName} ${coach.lastName}`;
       coachSelect.appendChild(option);
     });
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function loadTeamDetail() {
-  try {
-    const response = await fetch(`/teams/${teamId}`, {
-      headers: { 'Authorization': `Bearer ${token}` },
-    });
-    const result = await response.json();
-    if (!result.success) return;
   } catch (err) {
     console.error(err);
   }

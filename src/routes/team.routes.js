@@ -7,6 +7,8 @@ router.get('/coaches', requireAuth, teamController.getAllCoaches);
 router.get('/', requireAuth, teamController.getAllTeams);
 router.get('/:id', requireAuth, teamController.getTeamById);
 router.post('/', requireAuth, teamController.createTeam);
+router.put('/:id', requireAuth, teamController.updateTeam);
+router.patch('/:id/active', requireAuth, teamController.toggleTeamActive);
 router.post('/:id/coach', requireAuth, teamController.assignCoach);
 
 module.exports = router;
