@@ -67,57 +67,92 @@
       border-radius: 4px;
       cursor: pointer;
     }
- .player-row {
-  background: rgba(28, 28, 28, 0.92);
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.player-actions button {
-  background: transparent;
-  border: 1px solid #f5c400;
-  color: #f5c400;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-  margin-left: 6px;
-}
-.player-actions button:hover { background: #f5c400; color: #111; }
-.player-actions button.danger { border-color: #c62828; color: #c62828; }
-.player-actions button.danger:hover { background: #c62828; color: #fff; }
-    #error { color: #ff6666; text-align: center; margin-top: 20px; }
+    .player-list { max-width: 700px; margin: 0 auto; }
+    .player-row {
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .player-actions button {
+      background: transparent;
+      border: 1px solid #f5c400;
+      color: #f5c400;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-left: 6px;
+    }
+    .player-actions button:hover { background: #f5c400; color: #111; }
+    .player-actions button.danger { border-color: #c62828; color: #c62828; }
+    .player-actions button.danger:hover { background: #c62828; color: #fff; }
     .assign-coach {
-  max-width: 700px;
-  margin: 30px auto 0 auto;
-  background: rgba(28, 28, 28, 0.92);
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 20px;
-}
-.assign-coach h2 { color: #f5c400; font-size: 15px; margin-top: 0; }
-.assign-coach select {
-  padding: 10px;
-  background: #2a2a2a;
-  border: 1px solid #555;
-  color: #ffffff;
-  border-radius: 4px;
-  margin-right: 8px;
-}
-.assign-coach button {
-  background: #f5c400;
-  color: #111;
-  font-weight: bold;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.current-coaches { margin-top: 12px; font-size: 14px; color: #bbbbbb; }
+      max-width: 700px;
+      margin: 30px auto 0 auto;
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .assign-coach h2 { color: #f5c400; font-size: 15px; margin-top: 0; }
+    .assign-coach select {
+      padding: 10px;
+      background: #2a2a2a;
+      border: 1px solid #555;
+      color: #ffffff;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+    .assign-coach button {
+      background: #f5c400;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .current-coaches { margin-top: 12px; font-size: 14px; color: #bbbbbb; }
+    #error { color: #ff6666; text-align: center; margin-top: 20px; }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+        background-attachment: scroll;
+        padding: 20px 12px;
+      }
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .new-player {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .player-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .player-actions {
+        display: flex;
+        gap: 6px;
+      }
+      .player-actions button {
+        flex: 1;
+        margin-left: 0;
+      }
+      .assign-coach select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -140,20 +175,16 @@
   </div>
 
   <div class="player-list" id="playerList"></div>
+
   <div class="assign-coach">
-  <h2>AFFECTER UN ENTRAÎNEUR</h2>
-  <select id="coachSelect"></select>
-  <button id="assignBtn">AFFECTER</button>
-  <div class="current-coaches" id="currentCoaches"></div>
-</div>
+    <h2>AFFECTER UN ENTRAÎNEUR</h2>
+    <select id="coachSelect"></select>
+    <button id="assignBtn">AFFECTER</button>
+    <div class="current-coaches" id="currentCoaches"></div>
+  </div>
+
   <div id="error"></div>
 
   <script src="manage-players.js"></script>
 </body>
-@media (max-width: 600px) {
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-    background-attachment: scroll;
-  }
-}
 </html>

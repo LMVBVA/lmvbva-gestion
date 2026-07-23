@@ -24,48 +24,36 @@
       justify-content: space-between;
       align-items: center;
       max-width: 700px;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 20px auto;
     }
-    .topbar img {
-      max-width: 60px;
+    .topbar img { max-width: 60px; border-radius: 4px; }
+    .new-team {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .new-team input {
+      flex: 1;
+      padding: 10px;
+      background: #2a2a2a;
+      border: 1px solid #555;
+      color: #ffffff;
       border-radius: 4px;
     }
-    .topbar button {
-      background: transparent;
-      border: 1px solid #f5c400;
-      color: #f5c400;
-      padding: 8px 16px;
+    .new-team button {
+      background: #f5c400;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 11px 18px;
       border-radius: 4px;
       cursor: pointer;
     }
-    .topbar button:hover { background: #f5c400; color: #111; }
-    .new-team {
-  max-width: 700px;
-  margin: 0 auto 20px auto;
-  background: rgba(28, 28, 28, 0.92);
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  gap: 10px;
-}
-.new-team input {
-  flex: 1;
-  padding: 10px;
-  background: #2a2a2a;
-  border: 1px solid #555;
-  color: #ffffff;
-  border-radius: 4px;
-}
-.new-team button {
-  background: #f5c400;
-  color: #111;
-  font-weight: bold;
-  border: none;
-  padding: 11px 18px;
-  border-radius: 4px;
-  cursor: pointer;
-}
     h1 {
       text-align: center;
       color: #f5c400;
@@ -90,46 +78,75 @@
       align-items: center;
     }
     .team-card:hover { border-color: #f5c400; }
-    .team-actions { display: flex; gap: 8px; }
-.team-actions button {
-  background: transparent;
-  border: 1px solid #f5c400;
-  color: #f5c400;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-}
-.team-actions button:hover { background: #f5c400; color: #111; }
-.team-actions button.danger { border-color: #c62828; color: #c62828; }
-.team-actions button.danger:hover { background: #c62828; color: #fff; }
     .team-name { font-size: 17px; font-weight: bold; }
     .team-count { color: #bbbbbb; font-size: 14px; }
+    .team-actions { display: flex; gap: 8px; }
+    .team-actions button {
+      background: transparent;
+      border: 1px solid #f5c400;
+      color: #f5c400;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .team-actions button:hover { background: #f5c400; color: #111; }
+    .team-actions button.danger { border-color: #c62828; color: #c62828; }
+    .team-actions button.danger:hover { background: #c62828; color: #fff; }
     #error { color: #ff6666; text-align: center; margin-top: 20px; }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+        background-attachment: scroll;
+        padding: 20px 12px;
+      }
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .team-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .team-name {
+        display: block;
+      }
+      .team-actions {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 6px;
+      }
+      .team-actions button {
+        flex: 1 1 auto;
+        min-width: 80px;
+        font-size: 12px;
+        padding: 8px 6px;
+      }
+      .team-count {
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="topbar">
     <img src="logo.jpg" alt="LMVBVA">
-   <div>
-  <a href="manage-coaches.html" style="color: #f5c400; text-decoration: none; margin-right: 16px; font-size: 14px;">+ ENTRAÎNEUR</a>
-  <button id="logoutBtn">DÉCONNEXION</button>
-</div>
+    <div>
+      <a href="manage-coaches.html" style="color: #f5c400; text-decoration: none; margin-right: 16px; font-size: 14px;">+ ENTRAÎNEUR</a>
+      <button id="logoutBtn">DÉCONNEXION</button>
+    </div>
   </div>
   <h1>CHOISIR UNE ÉQUIPE</h1>
   <div class="new-team">
-  <input type="text" id="newTeamName" placeholder="Nom de la nouvelle équipe">
-  <button id="createTeamBtn">CRÉER L'ÉQUIPE</button>
-</div>
+    <input type="text" id="newTeamName" placeholder="Nom de la nouvelle équipe">
+    <button id="createTeamBtn">CRÉER L'ÉQUIPE</button>
+  </div>
   <div class="team-list" id="teamList"></div>
   <div id="error"></div>
 
   <script src="teams.js"></script>
 </body>
-@media (max-width: 600px) {
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-    background-attachment: scroll;
-  }
-}
 </html>

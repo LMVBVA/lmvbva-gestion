@@ -82,17 +82,33 @@
     }
     .training-card:hover { border-color: #f5c400; }
     #error { color: #ff6666; text-align: center; margin-top: 20px; }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+        background-attachment: scroll;
+        padding: 20px 12px;
+      }
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .new-training {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="topbar">
     <img src="logo.jpg" alt="LMVBVA">
-   <a href="teams.html" class="back-link">&larr; RETOUR AUX ÉQUIPES</a>
-<a href="#" id="statsLink" class="back-link" style="margin-left: 16px;">STATISTIQUES →</a>
+    <a href="teams.html" class="back-link">&larr; RETOUR AUX ÉQUIPES</a>
+    <a href="#" id="statsLink" class="back-link" style="margin-left: 16px;">STATISTIQUES →</a>
   </div>
   <h1 id="teamTitle">ENTRAÎNEMENTS</h1>
 
- <div class="new-training">
+  <div class="new-training">
     <div>
       <label for="newDate">Date</label>
       <input type="date" id="newDate">
@@ -109,10 +125,4 @@
 
   <script src="trainings.js"></script>
 </body>
-@media (max-width: 600px) {
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-    background-attachment: scroll;
-  }
-}
 </html>

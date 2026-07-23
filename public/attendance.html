@@ -57,7 +57,7 @@
       gap: 10px;
     }
     .player-name { font-size: 16px; font-weight: bold; }
-    .status-buttons { display: flex; gap: 6px; }
+    .status-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
     .status-btn {
       padding: 8px 12px;
       border-radius: 4px;
@@ -67,10 +67,10 @@
       cursor: pointer;
       font-size: 13px;
     }
-.status-btn.active-PRESENT { background: #2e7d32; border-color: #2e7d32; color: #fff; }
-.status-btn.active-ABSENT_UNEXCUSED { background: #c62828; border-color: #c62828; color: #fff; }
-.status-btn.active-ABSENT_EXCUSED { background: #f5c400; border-color: #f5c400; color: #111; }
-.status-btn.active-INJURED { background: #6a1b9a; border-color: #6a1b9a; color: #fff; }
+    .status-btn.active-PRESENT { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+    .status-btn.active-ABSENT_UNEXCUSED { background: #c62828; border-color: #c62828; color: #fff; }
+    .status-btn.active-ABSENT_EXCUSED { background: #f5c400; border-color: #f5c400; color: #111; }
+    .status-btn.active-INJURED { background: #6a1b9a; border-color: #6a1b9a; color: #fff; }
     .save-bar { max-width: 700px; margin: 20px auto 0 auto; text-align: center; }
     #saveBtn {
       background: #f5c400;
@@ -83,6 +83,30 @@
       letter-spacing: 1px;
     }
     #message { text-align: center; margin-top: 14px; font-size: 14px; }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+        background-attachment: scroll;
+        padding: 20px 12px;
+      }
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .player-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .status-buttons {
+        justify-content: space-between;
+      }
+      .status-btn {
+        flex: 1 1 auto;
+        min-width: 70px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -102,10 +126,4 @@
 
   <script src="attendance.js"></script>
 </body>
-@media (max-width: 600px) {
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-    background-attachment: scroll;
-  }
-}
 </html>
