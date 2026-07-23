@@ -22,12 +22,18 @@
       justify-content: center;
       min-height: 100vh;
     }
-    @media (max-width: 600px) {
+@media (max-width: 600px) {
   body {
     background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+    align-items: flex-end;
+    padding-bottom: 40px;
   }
   .card {
-    max-width: 90%;
+    max-width: 85%;
+    padding: 24px;
+  }
+  .card img {
+    max-width: 110px;
   }
 }
     .card {
