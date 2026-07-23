@@ -22,20 +22,6 @@
       justify-content: center;
       min-height: 100vh;
     }
-@media (max-width: 600px) {
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-    align-items: flex-end;
-    padding-bottom: 40px;
-  }
-  .card {
-    max-width: 85%;
-    padding: 24px;
-  }
-  .card img {
-    max-width: 110px;
-  }
-}
     .card {
       background: rgba(28, 28, 28, 0.92);
       border: 1px solid #444;
@@ -87,6 +73,21 @@
       margin-top: 14px;
       font-size: 14px;
       text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
+        align-items: flex-end;
+        padding-bottom: 40px;
+      }
+      .card {
+        max-width: 85%;
+        padding: 24px;
+      }
+      .card img {
+        max-width: 110px;
+      }
     }
   </style>
 </head>
