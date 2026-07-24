@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMVBVA - Entraînements</title>
+  <title>LMVBVA - Périodes sans entraînement</title>
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -27,11 +27,7 @@
       margin: 0 auto 20px auto;
     }
     .topbar img { max-width: 60px; border-radius: 4px; }
-    .back-link {
-      color: #f5c400;
-      text-decoration: none;
-      font-size: 14px;
-    }
+    .back-link { color: #f5c400; text-decoration: none; font-size: 14px; }
     h1 {
       text-align: center;
       color: #f5c400;
@@ -40,7 +36,7 @@
       max-width: 700px;
       margin: 0 auto 20px auto;
     }
-    .new-training {
+    .new-period {
       max-width: 700px;
       margin: 0 auto 20px auto;
       background: rgba(28, 28, 28, 0.92);
@@ -50,16 +46,19 @@
       display: flex;
       gap: 10px;
       align-items: flex-end;
+      flex-wrap: wrap;
     }
-    .new-training label { font-size: 13px; color: #bbbbbb; display: block; margin-bottom: 4px; }
-    .new-training input {
+    .new-period div { flex: 1; min-width: 130px; }
+    .new-period label { font-size: 13px; color: #bbbbbb; display: block; margin-bottom: 4px; }
+    .new-period input, .new-period select {
+      width: 100%;
       padding: 10px;
       background: #2a2a2a;
       border: 1px solid #555;
       color: #ffffff;
       border-radius: 4px;
     }
-    .new-training button {
+    .new-period button {
       background: #f5c400;
       color: #111;
       font-weight: bold;
@@ -68,64 +67,63 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    .training-list { max-width: 700px; margin: 0 auto; }
-    .training-card {
+    .period-list { max-width: 700px; margin: 0 auto; }
+    .period-row {
       background: rgba(28, 28, 28, 0.92);
       border: 1px solid #444;
       border-radius: 8px;
-      padding: 18px 20px;
+      padding: 16px 20px;
       margin-bottom: 12px;
-      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .training-card:hover { border-color: #f5c400; }
-    #error { color: #ff6666; text-align: center; margin-top: 20px; }
-
-    @media (max-width: 600px) {
-      body {
-        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header-mobile.png');
-        background-attachment: scroll;
-        padding: 20px 12px;
-      }
-      .topbar {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .new-training {
-        flex-direction: column;
-        align-items: stretch;
-      }
+    .period-row button {
+      background: transparent;
+      border: 1px solid #c62828;
+      color: #c62828;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
     }
+    .period-row button:hover { background: #c62828; color: #fff; }
+    #error { color: #ff6666; text-align: center; margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="topbar">
     <img src="logo.jpg" alt="LMVBVA">
     <a href="teams.html" class="back-link">&larr; RETOUR AUX ÉQUIPES</a>
-    <a href="#" id="statsLink" class="back-link" style="margin-left: 16px;">STATISTIQUES →</a>
-    <a href="#" id="slotsLink" class="back-link" style="margin-left: 16px;">CRÉNEAUX →</a>
   </div>
-  <h1 id="teamTitle">ENTRAÎNEMENTS</h1>
+  <h1>PÉRIODES SANS ENTRAÎNEMENT</h1>
 
-  <div class="new-training">
+  <div class="new-period">
     <div>
-      <label for="newDate">Date</label>
-      <input type="date" id="newDate">
+      <label for="label">Libellé</label>
+      <input type="text" id="label" placeholder="Ex: Vacances de Noël">
     </div>
     <div>
-      <label for="newTime">Heure</label>
-      <input type="time" id="newTime">
+      <label for="startDate">Début</label>
+      <input type="date" id="startDate">
     </div>
-    <button id="createBtn">CRÉER</button>
+    <div>
+      <label for="endDate">Fin</label>
+      <input type="date" id="endDate">
+    </div>
+    <div>
+      <label for="youthOnly">Concerne</label>
+      <select id="youthOnly">
+        <option value="false">Toutes les équipes</option>
+        <option value="true">Jeunes uniquement</option>
+      </select>
+    </div>
+    <button id="addBtn">AJOUTER</button>
   </div>
 
-  <div id="todaySection"></div>
-<h2 style="text-align:center; color:#bbbbbb; font-size:15px; max-width:700px; margin:30px auto 15px auto;">HISTORIQUE</h2>
-<div class="training-list" id="trainingList"></div>
+  <div class="period-list" id="periodList"></div>
   <div id="error"></div>
 
-  <script src="trainings.js"></script>
+  <script src="manage-periods.js"></script>
 </body>
 </html>

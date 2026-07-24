@@ -101,5 +101,20 @@ async function toggleTeamActive(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
+async function updateSeasonDates(req, res) {
+  const { seasonStartDate, seasonEndDate } = req.body;
 
-module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam, updateTeam, toggleTeamActive };
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Réservé aux administrateurs.' });
+  }
+
+  try {
+    const team = await teamService.updateSeasonDates(req.params.id, seasonStartDate, seasonEndDate);
+    return res.json({ success: true, data: team });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
+
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam, updateTeam, toggleTeamActive, updateSeasonDates };

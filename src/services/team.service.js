@@ -63,5 +63,13 @@ async function toggleTeamActive(id, active) {
     data: { active },
   });
 }
-
-module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam, updateTeam, toggleTeamActive };
+async function updateSeasonDates(id, seasonStartDate, seasonEndDate) {
+  return prisma.team.update({
+    where: { id: Number(id) },
+    data: {
+      seasonStartDate: seasonStartDate ? new Date(seasonStartDate) : null,
+      seasonEndDate: seasonEndDate ? new Date(seasonEndDate) : null,
+    },
+  });
+}
+module.exports = { getAllTeams, getTeamById, getAllCoaches, assignCoach, createTeam, updateTeam, toggleTeamActive, updateSeasonDates };

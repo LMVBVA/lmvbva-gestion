@@ -36,13 +36,17 @@ model User {
 }
 
 model Team {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique
-  active Boolean @default(true)
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  active  Boolean @default(true)
+  isYouth Boolean @default(false)
+  seasonStartDate DateTime?
+  seasonEndDate   DateTime?
 
   players    Player[]
   coaches    CoachTeam[]
   trainings  Training[]
+  slots      TrainingSlot[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -78,8 +82,11 @@ model Training {
   id     Int      @id @default(autoincrement())
   date   DateTime
   teamId Int
+  slotId    Int?
+  cancelled Boolean  @default(false)
 
   team Team @relation(fields: [teamId], references: [id], onDelete: Restrict)
+  slot TrainingSlot? @relation(fields: [slotId], references: [id], onDelete: SetNull)
 
   attendances Attendance[]
 
@@ -102,4 +109,26 @@ model Attendance {
   recordedAt DateTime @default(now())
 
   @@unique([trainingId, playerId])
+}
+model TrainingSlot {
+  id        Int    @id @default(autoincrement())
+  teamId    Int
+  dayOfWeek Int
+  startTime String
+  endTime   String
+
+  team      Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  trainings Training[]
+
+  createdAt DateTime @default(now())
+}
+
+model ExcludedPeriod {
+  id        Int      @id @default(autoincrement())
+  label     String
+  startDate DateTime
+  endDate   DateTime
+  youthOnly Boolean  @default(false)
+
+  createdAt DateTime @default(now())
 }

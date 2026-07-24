@@ -48,5 +48,26 @@ async function createTraining(req, res) {
     return res.status(500).json({ success: false, error: 'Erreur serveur.' });
   }
 }
+async function generateTrainings(req, res) {
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ success: false, error: 'Réservé aux administrateurs.' });
+  }
+  try {
+    const result = await trainingService.generateTrainings(req.params.teamId);
+    return res.json({ success: true, data: result });
+  } catch (err) {
+    if (err.message === 'TEAM_NOT_FOUND') {
+      return res.status(404).json({ success: false, error: 'Équipe introuvable.' });
+    }
+    if (err.message === 'NO_SEASON_DATES') {
+      return res.status(400).json({ success: false, error: 'Les dates de début/fin de saison ne sont pas définies pour cette équipe.' });
+    }
+    if (err.message === 'NO_SLOTS') {
+      return res.status(400).json({ success: false, error: 'Aucun créneau récurrent défini pour cette équipe.' });
+    }
+    console.error(err);
+    return res.status(500).json({ success: false, error: 'Erreur serveur.' });
+  }
+}
 
-module.exports = { getAllTrainings, getTrainingsByTeam, getTrainingById, createTraining };
+module.exports = { getAllTrainings, getTrainingsByTeam, getTrainingById, createTraining, generateTrainings };

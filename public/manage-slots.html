@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMVBVA - Créneaux</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('header2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+    }
+    .topbar img { max-width: 60px; border-radius: 4px; }
+    .back-link { color: #f5c400; text-decoration: none; font-size: 14px; }
+    h1 {
+      text-align: center;
+      color: #f5c400;
+      letter-spacing: 2px;
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+    }
+    .new-slot {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .new-slot div { flex: 1; min-width: 120px; }
+    .new-slot label { font-size: 13px; color: #bbbbbb; display: block; margin-bottom: 4px; }
+    .new-slot select, .new-slot input {
+      width: 100%;
+      padding: 10px;
+      background: #2a2a2a;
+      border: 1px solid #555;
+      color: #ffffff;
+      border-radius: 4px;
+    }
+    .new-slot button {
+      background: #f5c400;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 11px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .slot-list { max-width: 700px; margin: 0 auto; }
+    .slot-row {
+      background: rgba(28, 28, 28, 0.92);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slot-row button {
+      background: transparent;
+      border: 1px solid #c62828;
+      color: #c62828;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .slot-row button:hover { background: #c62828; color: #fff; }
+    #error { color: #ff6666; text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <img src="logo.jpg" alt="LMVBVA">
+    <a href="#" id="backLink" class="back-link">&larr; RETOUR AUX ENTRAÎNEMENTS</a>
+  </div>
+  <h1>CRÉNEAUX RÉCURRENTS</h1>
+  <div class="new-slot" id="seasonDatesForm">
+  <div>
+    <label for="seasonStart">Début de saison</label>
+    <input type="date" id="seasonStart">
+  </div>
+  <div>
+    <label for="seasonEnd">Fin de saison</label>
+    <input type="date" id="seasonEnd">
+  </div>
+  <button id="saveSeasonBtn">ENREGISTRER</button>
+</div>
+
+  <div class="new-slot">
+    <div>
+      <label for="daySelect">Jour</label>
+      <select id="daySelect">
+        <option value="1">Lundi</option>
+        <option value="2">Mardi</option>
+        <option value="3">Mercredi</option>
+        <option value="4">Jeudi</option>
+        <option value="5">Vendredi</option>
+        <option value="6">Samedi</option>
+        <option value="0">Dimanche</option>
+      </select>
+    </div>
+    <div>
+      <label for="startTime">Début</label>
+      <input type="time" id="startTime">
+    </div>
+    <div>
+      <label for="endTime">Fin</label>
+      <input type="time" id="endTime">
+    </div>
+    <button id="addBtn">AJOUTER</button>
+  </div>
+<div style="max-width: 700px; margin: 0 auto 20px auto; text-align: center;">
+  <button id="generateBtn" style="background:#f5c400; color:#111; font-weight:bold; border:none; padding:14px 30px; border-radius:4px; cursor:pointer; letter-spacing:1px;">GÉNÉRER LES ENTRAÎNEMENTS</button>
+</div>
+  <div class="slot-list" id="slotList"></div>
+  <div id="error"></div>
+
+  <script src="manage-slots.js"></script>
+</body>
+</html>

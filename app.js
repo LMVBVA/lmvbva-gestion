@@ -8,6 +8,8 @@ const playerRoutes = require('./src/routes/player.routes');
 const trainingRoutes = require('./src/routes/training.routes');
 const attendanceRoutes = require('./src/routes/attendance.routes');
 const statsRoutes = require('./src/routes/stats.routes');
+const slotRoutes = require('./src/routes/slot.routes');
+const excludedPeriodRoutes = require('./src/routes/excludedPeriod.routes');
 
 const app = express();
 
@@ -21,6 +23,8 @@ app.use('/players', playerRoutes);
 app.use('/trainings', trainingRoutes);
 app.use('/attendance', attendanceRoutes);
 app.use('/stats', statsRoutes);
+app.use('/slots', slotRoutes);
+app.use('/excluded-periods', excludedPeriodRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ success: true, message: 'API LMVBVA en ligne' });

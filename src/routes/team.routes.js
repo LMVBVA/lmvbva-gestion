@@ -9,6 +9,7 @@ router.get('/:id', requireAuth, teamController.getTeamById);
 router.post('/', requireAuth, teamController.createTeam);
 router.put('/:id', requireAuth, teamController.updateTeam);
 router.patch('/:id/active', requireAuth, teamController.toggleTeamActive);
+router.patch('/:id/season', requireAuth, teamController.updateSeasonDates);
 router.post('/:id/coach', requireAuth, teamController.assignCoach);
 
 module.exports = router;
